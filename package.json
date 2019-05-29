@@ -4,7 +4,7 @@
     "description": "FeatureMatrix React Client",
     "main": "featurematrix-react.js",
     "scripts": {
-        "build": "rm -rf build && webpack"
+        "build": "webpack"
     },
     "keywords": [
         "featurematrix"
