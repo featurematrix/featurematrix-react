@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./",
+        "sourceMap": false,
+        "declaration": true,
+        "module": "es6",
+        "target": "es5",
+        "lib": ["es5", "es6", "dom"],
+        "jsx": "react",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+    },
+    "include": ["./src/**/*"],
+    "exclude": [],
+}
