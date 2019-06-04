@@ -21,5 +21,8 @@
     },
     "peerDependencies": {
         "react": "^16.8.6"
+    },
+    "dependencies": {
+        "featurematrix-js": "0.0.1"
     }
 }

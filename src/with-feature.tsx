@@ -1,5 +1,5 @@
-import React, { ReactNode, ComponentType, Component } from 'react';
-import { FeatureMatrix, Subscription } from 'featurematrix';
+import React, { ComponentType, Component } from 'react';
+import { FeatureMatrix, Subscription } from 'featurematrix-js';
 
 export interface FeatureProps {
     getFeatureState: (key: string) => boolean;

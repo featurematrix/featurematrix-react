@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FeatureMatrix, Subscription } from 'featurematrix';
+import { FeatureMatrix, Subscription } from 'featurematrix-js';
 
 const setupUpdateSubscription = (featureClient: FeatureMatrix, featureKey: string, setFeatureState: (isOn: boolean) => void) => {
     return featureClient.on('update', feature => {

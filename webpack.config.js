@@ -18,7 +18,7 @@ module.exports = {
     },
     externals: {
         'react': 'react',
-        'featurematrix': 'featurematrix'
+        'featurematrix-js': 'featurematrix-js'
     },
     mode: 'production',
     resolve: {
