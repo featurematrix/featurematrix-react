@@ -1,5 +1,6 @@
 import React, { ComponentType, Component } from 'react';
 import { FeatureMatrix, Subscription } from 'featurematrix-js';
+import { createSubscription } from './subscription';
 
 export interface FeatureProps {
     getFeatureState: (key: string) => boolean;
@@ -19,21 +20,14 @@ export const createWithFeatures = (featureClient: FeatureMatrix) => <T extends o
             this.getFeatureState = this.getFeatureState.bind(this);
         }
 
-        setupUpdateSubscription() {
-            this.onUpdateSubscription = featureClient.on('update', feature => {
-                if (!this.mounted) return;
-                if (~this.featureKeys.indexOf(feature.key)) {
-                    this.forceUpdate();
-                }
-            });
-        };
-
         componentWillMount() {
+            const setupSubscription = createSubscription(this.featureKeys, featureClient, () => this.mounted, this.forceUpdate.bind(this));
+
             if (featureClient.initialized) {
-                this.setupUpdateSubscription();
+                this.onUpdateSubscription = setupSubscription();
             } else {
                 this.onReadySubscription = featureClient.on('ready', () => {
-                    this.setupUpdateSubscription();
+                    this.onUpdateSubscription = setupSubscription();
                 });
             }
         }

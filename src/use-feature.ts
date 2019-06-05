@@ -1,39 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { FeatureMatrix, Subscription } from 'featurematrix-js';
-
-const setupUpdateSubscription = (featureClient: FeatureMatrix, featureKey: string, setFeatureState: (isOn: boolean) => void) => {
-    return featureClient.on('update', feature => {
-        if (feature.key === featureKey) {
-            setFeatureState(feature.isOn);
-        }
-    });
-};
-
-const getFeatureAndSubscribe = (featureClient: FeatureMatrix, featureKey: string, setFeatureState: (isOn: boolean) => void) => {
-    const isOn = featureClient.getFeatureState(featureKey);
-    setFeatureState(isOn);
-    return setupUpdateSubscription(featureClient, featureKey, setFeatureState);
-}
+import { createSubscription } from './subscription';
 
 export const createUseFeature = (featureClient: FeatureMatrix) => (featureKey: string) => {
-    const [featureState, setFeatureState] = useState(false);
+    const [,update] = useState();
+    const mountedRef = useRef<boolean>();
+
+    const checkMounted = useCallback(() => mountedRef.current, [mountedRef.current]);
 
     useEffect(() => {
+        mountedRef.current = true;
         let onReadySubscription: Subscription, onUpdateSubscription: Subscription;
+        const setupSubscription = createSubscription([featureKey], featureClient, checkMounted, update);
 
         if (featureClient.initialized) {
-            onUpdateSubscription = getFeatureAndSubscribe(featureClient, featureKey, setFeatureState);
+            onUpdateSubscription = setupSubscription();
         } else {
             onReadySubscription = featureClient.on('ready', () => {
-                onUpdateSubscription = getFeatureAndSubscribe(featureClient, featureKey, setFeatureState);
+                onUpdateSubscription = setupSubscription();
             });
         }
 
         return () => {
             onReadySubscription && onReadySubscription.unsubscribe();
             onReadySubscription && onUpdateSubscription.unsubscribe();
+            mountedRef.current = false;
         };
     }, [featureKey]);
 
-    return featureState;
+    return featureClient.getFeatureState(featureKey);
 };
