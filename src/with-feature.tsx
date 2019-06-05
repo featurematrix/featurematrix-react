@@ -21,7 +21,7 @@ export const createWithFeatures = (featureClient: FeatureMatrix) => <T extends o
         }
 
         componentWillMount() {
-            const setupSubscription = createSubscription(this.featureKeys, featureClient, () => this.mounted, this.forceUpdate.bind(this));
+            const setupSubscription = createSubscription(this.featureKeys, featureClient, () => this.mounted, () => this.forceUpdate());
 
             if (featureClient.initialized) {
                 this.onUpdateSubscription = setupSubscription();
@@ -52,7 +52,7 @@ export const createWithFeatures = (featureClient: FeatureMatrix) => <T extends o
         }
 
         render() {
-            return <WrappedComponent {...this.props} getFeatureState={this.getFeatureState} />;
+            return <WrappedComponent {...this.props} getFeatureState={this.getFeatureState} updateKey={Date.now()} />;
         }
     }
 };
