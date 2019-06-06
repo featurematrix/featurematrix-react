@@ -1,6 +1,6 @@
 {
     "name": "featurematrix-react",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "FeatureMatrix React Client",
     "main": "featurematrix-react.js",
     "scripts": {
@@ -23,6 +23,6 @@
         "react": "^16.8.6"
     },
     "dependencies": {
-        "featurematrix-js": "^0.0.2"
+        "featurematrix-js": "latest"
     }
 }
