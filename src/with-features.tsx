@@ -6,7 +6,7 @@ export interface FeatureProps {
     getFeatureState: (key: string) => boolean;
 }
 
-export const createWithFeatures = (featureClient: FeatureMatrix) => <T extends object>(featureKeys: string[], WrappedComponent: ComponentType<T>) => {
+export const createWithFeatures = (featureClient: FeatureMatrix) => <T extends object>(featureKeys: string[], ComponentToWrap: ComponentType<T>) => {
     return class WithFeature extends Component<T & FeatureProps> {
         onReadySubscription: Subscription;
         onUpdateSubscription: Subscription;
@@ -52,7 +52,7 @@ export const createWithFeatures = (featureClient: FeatureMatrix) => <T extends o
         }
 
         render() {
-            return <WrappedComponent {...this.props} getFeatureState={this.getFeatureState} updateKey={Date.now()} />;
+            return <ComponentToWrap {...this.props} getFeatureState={this.getFeatureState} updateKey={Date.now()} />;
         }
     }
 };
