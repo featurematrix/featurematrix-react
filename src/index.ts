@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FeatureMatrix } from 'featurematrix-js';
 import { createUseFeature } from './use-feature';
-import { createWithFeatures } from './with-feature';
+import { createWithFeatures } from './with-features';
 
 export const featureClient = new FeatureMatrix();
 
