@@ -1,5 +1,5 @@
 # FeatureMatrix React
-FeatureMatrix SDK for React.  
+FeatureMatrix Client for React.  
 Get feature states using `withFeatures` Higher Order Component and `useFeature` hook.  
 If features are toggled on/off, components using those features will be rerendered in realtime. No need to refresh the page!  
 Built on [FeautureMatrix JS](https://github.com/featurematrix/featurematrix-js).
@@ -29,14 +29,14 @@ featureClient.init({
 ```
 
 ### `useFeature` hook
-`useFeature(featureKey: string) => boolean`  
+`useFeature(featureKey: string): boolean`  
 
 `useFeature` accepts a feature key as a single argument and returns the state of the feature as a boolean. If the `featureClient` is not initialized yet or the key is invalid it will return `null` and will complain in the console.
 
 ```jsx
 import { useFeature } from 'featurematrix-react';
 
-export const HomePage => () => {
+export const HomePage = () => {
     const feedbackIsEnabled = useFeature('feedback');
 
     return (
@@ -53,11 +53,11 @@ export const HomePage => () => {
 If the feature will be toggled in app dashboard, `HomePage` component will be rerendered.
 
 ### `withFeatures` Higher Order Component
-`withFeatures<T>(featureKeys: string[], ComponentToWrap: React.ComponentType<T>) => React.ComponentType<T & FeatureProps>`  
+`withFeatures<T>(featureKeys: string[], ComponentToWrap: React.ComponentType<T>): React.ComponentType<T & FeatureProps>`  
 
 `withFeatures` accepts a list of feature keys as the first argument and the component to be wrapped as the second argument. Returns a new component which has a `getFeatureState` prop.
 
-`getFeatureState(key: string) => boolean`
+`getFeatureState(key: string): boolean`
 
  If the `featureClient` is not initialized yet or the key is invalid `getFeatureState` will return `null` and will complain in the console.
 
