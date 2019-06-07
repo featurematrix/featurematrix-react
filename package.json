@@ -1,6 +1,6 @@
 {
     "name": "featurematrix-react",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "FeatureMatrix React Client",
     "main": "featurematrix-react.js",
     "scripts": {
@@ -9,6 +9,14 @@
     "keywords": [
         "featurematrix", "feature", "toggle"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/featurematrix/featurematrix-react.git"
+    },
+    "bugs": {
+        "url": "https://github.com/featurematrix/featurematrix-react/issues"
+    },
+    "homepage": "https://featurematrix.io",
     "author": "Nairi Narinyan",
     "license": "ISC",
     "devDependencies": {
