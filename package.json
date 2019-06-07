@@ -1,13 +1,13 @@
 {
     "name": "featurematrix-react",
-    "version": "0.0.6",
+    "version": "0.0.8",
     "description": "FeatureMatrix React Client",
     "main": "featurematrix-react.js",
     "scripts": {
         "build": "webpack"
     },
     "keywords": [
-        "featurematrix"
+        "featurematrix", "feature", "toggle"
     ],
     "author": "Nairi Narinyan",
     "license": "ISC",
