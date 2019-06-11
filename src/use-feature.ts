@@ -11,7 +11,7 @@ export const createUseFeature = (featureClient: FeatureMatrix) => (featureKey: s
     useEffect(() => {
         mountedRef.current = true;
         let onReadySubscription: Subscription, onUpdateSubscription: Subscription;
-        const setupSubscription = createSubscription([featureKey], featureClient, checkMounted, update);
+        const setupSubscription = createSubscription([featureKey], featureClient, checkMounted, () => update({}));
 
         if (featureClient.initialized) {
             onUpdateSubscription = setupSubscription();
